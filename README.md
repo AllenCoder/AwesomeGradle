@@ -1,19 +1,18 @@
-##1. Gradle 代码片段
+## Gradle 代码片段
  
- 1. 使用方式
- 在 module 的build.gradle 引入 依赖即可
+ ###  使用方式  在 module 的build.gradle 引入 依赖即可
  
- > 统计 方法执行顺序
+ >  1. 统计 方法执行顺序
  ```
 apply from: 'AppMethodOrder.gradle'
 
  ```
- > 自动输出所有task的耗时
+ > 2.  自动输出所有task的耗时
  ```
 apply from:'taskListener.gradle'
  ```
  
-  > 自动判断task的build类型 是debug模式还是release模式
+  > 3.  自动判断task的build类型 是debug模式还是release模式
   ```
  apply from:'taskRelease.gradle'
   ```
