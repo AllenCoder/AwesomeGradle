@@ -1,0 +1,28 @@
+language: android
+
+android:
+  components:
+    - tools
+    - tools
+    - platform-tools
+    - build-tools-25.0.2
+    - android-25
+
+jdk:
+  - oraclejdk8
+
+
+licenses:
+    - android-sdk-license-.+
+
+before_script:
+  # Accept licenses
+  - echo $ANDROID_HOME
+  - mkdir $ANDROID_HOME/licenses
+  - echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > $ANDROID_HOME/licenses/android-sdk-license
+  - echo 84831b9409646a918e30573bab4c9c91346d8abd > $ANDROID_HOME/licenses/android-sdk-preview-license
+  # Create and start emulator, TODO: emulator doesn't work at the moment
+  #- echo no | android create avd --force -n test -t "android-"$EMULATOR_API_LEVEL --abi $ANDROID_ABI --tag $ANDROID_TAG
+  #- emulator -avd test -no-skin -no-audio -no-window &
+  #- android-wait-for-emulator
+

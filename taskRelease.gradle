@@ -1,0 +1,35 @@
+apply plugin: 'com.android.application'
+
+/**
+ *
+ *  debug 模式下默认关闭 ,release 模式下开启 加快as 编译速度
+ */
+import java.util.regex.Pattern
+import java.util.regex.Matcher
+/**
+ *  判断当前 编译类型是否是 debug 或者是release模式
+ * @return 是否为release
+ */
+
+def taskRelease() {
+    Gradle gradle = getGradle()
+    String  tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+    Pattern pattern;
+    if (tskReqStr.contains("assemble")) {
+        println tskReqStr
+        pattern = Pattern.compile("assemble(\\w*)(Release|Debug)")
+    } else {
+        pattern = Pattern.compile("generate(\\w*)(Release|Debug)")
+    }
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find()) {
+        String task = matcher.group(0).toLowerCase()
+        println("[BuildType] Current task: " + task)
+        return task.contains("release")
+    } else {
+        println "[BuildType] NO MATCH FOUND"
+        return true;
+    }
+}
